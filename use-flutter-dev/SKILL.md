@@ -20,6 +20,28 @@ description: Develop, debug, and manage Flutter applications using specialized D
 6) **Database**: Must use **SQLite** for structured data storage.
    - Use `PrefStore` (from fl_lib) for simple key-value/settings storage.
 
+## Project Structure
+- core/ - Core services and singletons
+   - config/ - App configuration
+   - di/ - Dependency injection setup (GetIt/Injectable)
+   - routing/ - GoRouter configuration
+   - utils/ - General utilities
+- data/ - Data models and storage
+  - models/ - Freezed data models
+  - providers/ - Riverpod providers (using code generation)
+  - repos/ - Data access layer
+  - services/ - External services (API, Database, etc.)
+- views/ - UI components and pages
+  - pages/ - Main pages
+  - widgets/ - Reusable widgets
+  - pops/ - Popups and dialogs
+- app.dart - App entry point widget
+- main.dart - Main entry file
+
+## Additional Guidelines
+- Follow code style and formatting rules in `.vscode/settings.json`. Do not auto-format code if it conflicts.
+- `utils` classes require unit test coverage.
+
 ## Instructions
 1) **Setup**: 
    - Ensure the project root is added via `dart___add_roots`.
@@ -41,7 +63,7 @@ description: Develop, debug, and manage Flutter applications using specialized D
    - Run tests using `dart___run_tests` (supports filtering, tags, and specialized reporting).
    - Manage packages (add/get/upgrade) using `dart___pub`.
    - Analyze code health with `dart___analyze_files` and fix issues with `dart___dart_fix`.
-   - **Code Generation**: Ensure `build_runner` is run when modifying Riverpod providers or Freezed models.
+    - **Code Generation**: Run `dart run build_runner build --delete-conflicting-outputs` when modifying Riverpod providers or Freezed models.
 
 ## Example prompts
 - "Run the flutter app on the iOS simulator"
@@ -50,3 +72,5 @@ description: Develop, debug, and manage Flutter applications using specialized D
 - "Implement a settings page using fl_lib's PrefStore and AdaptiveList"
 - "Add a SQLite table for storing todo items"
 - "Add a new route for the profile page using GoRouter"
+- "Fix analysis errors in the project"
+- "Generate a Freezed model for User with name and age fields"
