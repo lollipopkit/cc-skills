@@ -19,6 +19,10 @@ description: Develop, debug, and manage Flutter applications using specialized D
    - **Core**: `Loggers`, `Dio`, `AppLinks`.
 6) **Database**: Must use **SQLite** for structured data storage.
    - Use `PrefStore` (from fl_lib) for simple key-value/settings storage.
+7) **StatefulWidget State Structure**: [Structure Details](topics/state_structure.md) - Split `State` classes into three parts using `extension`:
+   - **UI**: Main class with `build()` method.
+   - **Actions**: Extension for event handlers (e.g., `_onTap`, `_submit`).
+   - **Utils**: Extension for private helper methods and logic.
 
 ## Project Structure
 - core/ - Core services and singletons
@@ -27,6 +31,7 @@ description: Develop, debug, and manage Flutter applications using specialized D
    - routing/ - GoRouter configuration
    - utils/ - General utilities
 - data/ - Data models and storage
+  - consts/ - Constant definitions
   - models/ - Freezed data models
   - providers/ - Riverpod providers (using code generation)
   - repos/ - Data access layer
@@ -39,17 +44,18 @@ description: Develop, debug, and manage Flutter applications using specialized D
 - main.dart - Main entry file
 
 ## Additional Guidelines
-- Follow code style and formatting rules in `.vscode/settings.json`. Do not auto-format code if it conflicts.
-- `utils` classes require unit test coverage.
+- **Formatting**: Do NOT run `dart format`. Follow the project's existing code style.
+- **Deprecations**: Replace all `Color.withOpacity` usage with `Color.withValues` (Flutter 3.27+).
+- **Testing**: `utils` classes require unit test coverage.
 
 ## Instructions
-1) **Setup**: 
+1) **Setup**:
    - Ensure the project root is added via `dart___add_roots`.
    - List available devices with `dart___list_devices` before launching apps.
 
 2) **Running & Lifecycle**:
    - Use `dart___launch_app` to run applications on a specific device.
-   - **Crucial**: Use `dart___hot_reload` for quick UI changes (preserves state) and `dart___hot_restart` for app logic/state resets. 
+   - **Crucial**: Use `dart___hot_reload` for quick UI changes (preserves state) and `dart___hot_restart` for app logic/state resets.
    - Avoid `flutter run` via shell; use the dedicated tools to maintain control.
    - Stop apps using `dart___stop_app` with the correct PID.
 
@@ -63,7 +69,9 @@ description: Develop, debug, and manage Flutter applications using specialized D
    - Run tests using `dart___run_tests` (supports filtering, tags, and specialized reporting).
    - Manage packages (add/get/upgrade) using `dart___pub`.
    - Analyze code health with `dart___analyze_files` and fix issues with `dart___dart_fix`.
-    - **Code Generation**: Run `dart run build_runner build --delete-conflicting-outputs` when modifying Riverpod providers or Freezed models.
+   - **Code Generation**:
+     - One-time build: `dart run build_runner build --delete-conflicting-outputs`
+     - Watch mode (recommended during dev): `dart run build_runner watch --delete-conflicting-outputs`
 
 ## Example prompts
 - "Run the flutter app on the iOS simulator"

@@ -1,0 +1,97 @@
+# StatefulWidget State Structure
+
+To maintain clean and manageable code in `StatefulWidget`, split the `State` class into three parts using `extensions` within the same file. This separates UI code from logic and event handling.
+
+## Structure
+
+1.  **UI**: The main `State` class containing the `build()` method and widget definitions.
+2.  **Actions**: An extension on the `State` class for event handlers (e.g., `_onTap`, `_submit`).
+3.  **Utils**: An extension on the `State` class for private helper methods and business logic.
+
+## Example
+
+```dart
+import 'package:flutter/material.dart';
+
+class MyPage extends StatefulWidget {
+  const MyPage({super.key});
+
+  @override
+  State<MyPage> createState() => _MyPageState();
+}
+
+// 1. UI - Main State Class
+class _MyPageState extends State<MyPage> {
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('My Page')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: const InputDecoration(labelText: 'Enter text'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _onSubmit, // Reference to Actions extension
+              child: const Text('Submit'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// 2. Actions - Event Handlers
+extension _MyPageActions on _MyPageState {
+  void _onSubmit() {
+    final text = _controller.text;
+    if (_validateInput(text)) { // Reference to Utils extension
+      _showSuccessDialog(text);
+    } else {
+      _showErrorSnackBar();
+    }
+  }
+
+  void _showSuccessDialog(String text) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Success'),
+        content: Text('You entered: $text'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 3. Utils - Helper Methods & Logic
+extension _MyPageUtils on _MyPageState {
+  bool _validateInput(String text) {
+    return text.isNotEmpty && text.length > 3;
+  }
+
+  void _showErrorSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Input must be at least 4 characters')),
+    );
+  }
+}
+```
