@@ -35,7 +35,7 @@ MaterialApp(
 )
 ```
 
-In your main app widget (e.g., in `didChangeDependencies`), call `context.setLibL10n()` to synchronize localization settings:
+In your main app widget (e.g., in `didChangeDependencies`), call `context.setLibL10n()` only in root Widget to synchronize localization settings:
 
 ```dart
 @override

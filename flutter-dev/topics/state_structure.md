@@ -1,6 +1,6 @@
-# StatefulWidget State Structure
+# Widget State Structure (Stateful/Stateless)
 
-To maintain clean and manageable code in `StatefulWidget`, split the `State` class into three parts using `extensions` within the same file. This separates UI code from logic and event handling.
+To maintain clean and manageable code, split widget classes into three parts using `extensions` within the same file. This applies to both `StatefulWidget` (`State` class) and `StatelessWidget` (the widget class), separating UI from logic and event handling.
 
 ## Structure
 
@@ -8,7 +8,7 @@ To maintain clean and manageable code in `StatefulWidget`, split the `State` cla
 2.  **Actions**: An extension on the `State` class for event handlers (e.g., `_onTap`, `_submit`).
 3.  **Utils**: An extension on the `State` class for private helper methods and business logic.
 
-## Example
+## Example (StatefulWidget)
 
 ```dart
 import 'package:flutter/material.dart';
@@ -91,6 +91,69 @@ extension _MyPageUtils on _MyPageState {
   void _showErrorSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Input must be at least 4 characters')),
+    );
+  }
+}
+```
+
+## Example (StatelessWidget)
+
+```dart
+import 'package:flutter/material.dart';
+
+class MyStatelessPage extends StatelessWidget {
+  const MyStatelessPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('My Stateless Page')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => _onSubmit(context), // Reference to Actions extension
+          child: const Text('Submit'),
+        ),
+      ),
+    );
+  }
+}
+
+// 2. Actions - Event Handlers
+extension _MyStatelessPageActions on MyStatelessPage {
+  void _onSubmit(BuildContext context) {
+    if (_validateInput('ok')) { // Reference to Utils extension
+      _showSuccessDialog(context);
+    } else {
+      _showErrorSnackBar(context);
+    }
+  }
+
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Success'),
+        content: const Text('Submitted.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 3. Utils - Helper Methods & Logic
+extension _MyStatelessPageUtils on MyStatelessPage {
+  bool _validateInput(String text) {
+    return text.isNotEmpty;
+  }
+
+  void _showErrorSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Invalid input')),
     );
   }
 }
