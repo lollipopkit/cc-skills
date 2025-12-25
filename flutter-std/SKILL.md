@@ -1,13 +1,13 @@
 ---
-name: flutter-dev
-description: Build and debug Flutter/Dart apps with Riverpod (codegen), Freezed, GoRouter, and fl_lib. Use when implementing Flutter features, running apps, hot reload/restart, or debugging UI.
+name: flutter-std
+description: Build and debug Flutter/Dart apps with Riverpod (codegen), Freezed, and GoRouter. Use when implementing Flutter features, running apps, hot reload/restart, or debugging UI.
 ---
 
-# Flutter Dev Tools
+# Flutter Std Tools
 
 ## When to use
 - Use when the user is working on Flutter/Dart features, running the app, hot reload/restart, or debugging UI.
-- Use when requests mention Riverpod, Freezed, GoRouter, fl_lib, or Flutter widget structure.
+- Use when requests mention Riverpod, Freezed, GoRouter, or Flutter widget structure.
 
 ## Instructions
 1) **Setup**: Ensure the project root is added via `dart___add_roots`. List devices with `dart___list_devices` before launching.
@@ -22,9 +22,8 @@ description: Build and debug Flutter/Dart apps with Riverpod (codegen), Freezed,
 2) **Data Models**: Must use **Freezed** for immutable data classes and unions.
 3) **Dependency Injection**: Must use **GetIt** and **Injectable** for service location.
 4) **Routing**: Must use **GoRouter** for navigation (declarative routing).
-5) **Common Library**: Must utilize **fl_lib** as the foundation. See [General Setup](topics/fl_lib.md), [Stores](topics/fl_lib_stores.md), [Widgets](topics/fl_lib_widgets.md), [Utils](topics/fl_lib_utils.md), and [Extensions](topics/fl_lib_extensions.md). Core includes `Loggers`, `Dio`, and `AppLinks`.
-6) **Database**: Must use **SQLite** for structured data storage; use `PrefStore` (from fl_lib) for simple key-value/settings storage.
-7) **Widget State Structure (Stateful/Stateless)**: Follow [Structure Details](topics/state_structure.md) and split widget classes into UI, Actions, and Utils extensions.
+5) **Database**: Must use **SQLite** for structured data storage.
+6) **Widget State Structure (Stateful/Stateless)**: Follow [Structure Details](topics/state_structure.md) and split widget classes into UI, Actions, and Utils extensions.
 
 ## Project Structure
 - core/ - Core services and singletons
@@ -54,7 +53,7 @@ description: Build and debug Flutter/Dart apps with Riverpod (codegen), Freezed,
 - "Run the flutter app on the iOS simulator"
 - "Hot reload the app to show the new colors"
 - "Create a new Riverpod provider for user authentication using code gen"
-- "Implement a settings page using fl_lib's PrefStore and AdaptiveList"
+- "Implement a settings page using the project's existing preferences store"
 - "Add a SQLite table for storing todo items"
 - "Add a new route for the profile page using GoRouter"
 - "Fix analysis errors in the project"
