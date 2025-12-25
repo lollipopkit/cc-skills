@@ -1,6 +1,6 @@
 ---
-name: use-flutter-dev
-description: Develop, debug, and manage Flutter applications using specialized Dart/Flutter tools. Enforces Riverpod (code gen), Freezed, fl_lib, GetIt/Injectable, GoRouter, and SQLite architecture.
+name: flutter-dev
+description: Develop and debug Flutter apps with specialized MCP tools. Enforces Riverpod (codegen), Freezed, GoRouter, and fl_lib architecture. Use for "run app", "hot reload", "debug", or "implement feature" in Flutter.
 ---
 
 # Use Flutter Dev Tools

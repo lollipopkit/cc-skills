@@ -1,6 +1,6 @@
 ---
-name: use-context7-mcp
-description: Use the Context7 MCP tools to look up library APIs before answering. Use when needing official API docs, methods, or usage examples for a library or package.
+name: context7-mcp
+description: Retrieve official library documentation and API references. Use when the user asks for "docs", "API signature", "usage examples", or "how to use" a specific package.
 ---
 
 # Use Context7 MCP for library APIs

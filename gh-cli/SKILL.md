@@ -1,6 +1,7 @@
 ---
-name: use-gh-cli
-description: Use GitHub CLI (gh) for GitHub repos, PRs, issues, and releases. Use when the user asks to interact with GitHub via CLI, and avoid exposing tokens or secrets.
+name: gh-cli
+description: Interact with GitHub repositories, PRs, and issues using the `gh` CLI. Use when the user asks to "list PRs", "check out PR", "view issue", or "create release".
+allowed-tools: Bash
 ---
 
 # Use GitHub CLI

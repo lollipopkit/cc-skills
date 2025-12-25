@@ -1,6 +1,7 @@
 ---
-name: use-supabase
-description: Read Supabase table structure and current data using the service role key. Use when you need to inspect schemas, columns, or sample rows from the configured Supabase project.
+name: supabase-rest
+description: Inspect Supabase database schemas and data. Use when the user asks to "check table", "list columns", or "query data" in Supabase. READ-ONLY.
+allowed-tools: Bash
 ---
 
 # Use Supabase (read-only)

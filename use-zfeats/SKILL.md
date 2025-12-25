@@ -1,6 +1,7 @@
 ---
 name: use-zfeats
-description: Plan large features by drafting step-by-step checklists in zfeats/*.md using - [ ] items, then implement and mark items done as - [x]. Use when breaking down or executing multi-step tech plans.
+description: Plan and execute complex features using markdown checklists. Use when the user asks to "plan a feature", "create a checklist", or "break down a task".
+allowed-tools: Read, Write, Edit, Glob, Bash
 ---
 
 # Use zfeats for plans
